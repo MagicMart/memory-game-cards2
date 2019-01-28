@@ -23,9 +23,9 @@ class Cards extends React.Component {
     }
 
     matchCards() {
-        const { holdCards } = this.state;
-        const update = this.state.cardClass.map((el, j) => {
-            return holdCards[0].i === j || holdCards[1].i === j
+        const [card1, card2] = this.state.holdCards;
+        const update = this.state.cardClass.map((el, i) => {
+            return card1.cardIndex === i || card2.cardIndex === i
                 ? "card open match"
                 : el;
         });
@@ -33,16 +33,16 @@ class Cards extends React.Component {
     }
 
     closeCards() {
-        const { holdCards } = this.state;
-        const update = this.state.cardClass.map((el, j) => {
-            return holdCards[0].i === j || holdCards[1].i === j ? "card" : el;
+        const [card1, card2] = this.state.holdCards;
+        const update = this.state.cardClass.map((el, i) => {
+            return card1.cardIndex === i || card2.cardIndex === i ? "card" : el;
         });
         this.setState({ cardClass: update, holdCards: [] });
     }
 
     checkCards() {
         const { holdCards } = this.state;
-        if (holdCards[0].card === holdCards[1].card) {
+        if (holdCards[0].cardName === holdCards[1].cardName) {
             this.matchCards();
         } else {
             window.setTimeout(() => this.closeCards(), 600);
@@ -55,22 +55,23 @@ class Cards extends React.Component {
         }
         if (this.state.holdCards.length > 1) {
             this.checkCards();
-        } else {
-            return;
         }
     }
 
     openCard(obj) {
-        const { card, i, cardClass } = obj;
+        const { cardName, cardIndex, cardClass } = obj;
         if (cardClass === "card open show" || cardClass === "card open match") {
             return;
         }
-        const updateCardClass = this.state.cardClass.map((el, j) => {
-            return j === i ? "card open show" : el;
+        const updateCardClass = this.state.cardClass.map((el, i) => {
+            return i === cardIndex ? "card open show" : el;
         });
         this.setState(function(state) {
             return {
-                holdCards: [...state.holdCards, { card: card, i: i }],
+                holdCards: [
+                    ...state.holdCards,
+                    { cardName: cardName, cardIndex: cardIndex }
+                ],
                 // heldCards: state.heldCards + 1,
                 cardClass: updateCardClass
             };
@@ -86,8 +87,8 @@ class Cards extends React.Component {
                         className={this.state.cardClass[i]}
                         onClick={function() {
                             this.openCard({
-                                card: card,
-                                i: i,
+                                cardName: card,
+                                cardIndex: i,
                                 cardClass: this.state.cardClass[i]
                             });
                         }.bind(this)}
