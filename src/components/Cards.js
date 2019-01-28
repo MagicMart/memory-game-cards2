@@ -22,30 +22,41 @@ class Cards extends React.Component {
         });
     }
 
-    matchCards() {
+    matchOrClose(fn) {
         const [card1, card2] = this.state.holdCards;
-        const update = this.state.cardClass.map((el, i) => {
-            return card1.cardIndex === i || card2.cardIndex === i
-                ? "card open match"
-                : el;
-        });
-        this.setState({ cardClass: update, holdCards: [] });
-    }
-
-    closeCards() {
-        const [card1, card2] = this.state.holdCards;
-        const update = this.state.cardClass.map((el, i) => {
-            return card1.cardIndex === i || card2.cardIndex === i ? "card" : el;
-        });
+        const update = fn(card1, card2);
         this.setState({ cardClass: update, holdCards: [] });
     }
 
     checkCards() {
-        const { holdCards } = this.state;
-        if (holdCards[0].cardName === holdCards[1].cardName) {
-            this.matchCards();
+        const [card1, card2] = this.state.holdCards;
+        if (card1.cardName === card2.cardName) {
+            this.matchOrClose(
+                // Match
+                function match(card1, card2) {
+                    return this.state.cardClass.map((el, i) => {
+                        return card1.cardIndex === i || card2.cardIndex === i
+                            ? "card open match"
+                            : el;
+                    });
+                }.bind(this)
+            );
         } else {
-            window.setTimeout(() => this.closeCards(), 600);
+            window.setTimeout(
+                () =>
+                    this.matchOrClose(
+                        // Close
+                        function close(card1, card2) {
+                            return this.state.cardClass.map((el, i) => {
+                                return card1.cardIndex === i ||
+                                    card2.cardIndex === i
+                                    ? "card"
+                                    : el;
+                            });
+                        }.bind(this)
+                    ),
+                600
+            );
         }
     }
 
