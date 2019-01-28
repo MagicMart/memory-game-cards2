@@ -1,44 +1,39 @@
 import React from "react";
 import api from "../utils/api";
-const { shuffleArray } = api;
 
-const cards = [
-    "fa fa-diamond",
-    "fa fa-paper-plane-o",
-    "fa fa-anchor",
-    "fa fa-bolt",
-    "fa fa-cube",
-    "fa fa-leaf",
-    "fa fa-bicycle",
-    "fa fa-bomb",
-    "fa fa-diamond",
-    "fa fa-paper-plane-o",
-    "fa fa-anchor",
-    "fa fa-bolt",
-    "fa fa-cube",
-    "fa fa-leaf",
-    "fa fa-bicycle",
-    "fa fa-bomb"
-];
+const { shuffleArray, cardArray } = api;
 
 class Cards extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            cards: []
+            cards: [],
+            holdCards: [],
+            heldCards: 0
         };
         this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
-        this.setState({ cards: shuffleArray(cards) });
+        this.setState({ cards: shuffleArray(cardArray) });
     }
 
     handleClick(e) {
-        const event = e.target;
-        event.classList.toggle("open");
-        event.classList.toggle("show");
+        const target = e.currentTarget;
+        if (
+            target.className === "card open show" ||
+            target.className === "card open match"
+        ) {
+            return;
+        }
+        target.className = "card open show";
+        this.setState(function(state) {
+            return {
+                holdCards: [...state.holdCards, target],
+                heldCards: state.heldCards + 1
+            };
+        });
     }
     render() {
         const cards = this.state.cards.map(
