@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import api from "../utils/api";
 
 const { shuffleArray, cardArray } = api;
@@ -70,6 +72,10 @@ class Cards extends React.Component {
     }
 
     openCard(obj) {
+        if (!this.gameStarted) {
+            this.props.handleStart();
+            this.gameStarted = true;
+        }
         const { cardName, cardIndex, cardClass } = obj;
         if (cardClass === "card open show" || cardClass === "card open match") {
             return;
@@ -112,5 +118,9 @@ class Cards extends React.Component {
         return <React.Fragment>{cards}</React.Fragment>;
     }
 }
+
+Cards.propTypes = {
+    handleStart: PropTypes.func.isRequired
+};
 
 export default Cards;
