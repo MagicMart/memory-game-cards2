@@ -4,6 +4,48 @@ import PropTypes from "prop-types";
 import Seconds from "./Seconds";
 // import Moves from "./Moves";
 
+class Stars extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            colors: ["gold", "gold", "gold"]
+        };
+    }
+
+    componentDidUpdate(prevProps) {
+        const { moves } = this.props;
+        if (prevProps.moves === moves) {
+            return;
+        }
+        if (moves !== 5 && moves !== 10) {
+            return;
+        }
+        let update;
+        if (moves === 5) {
+            update = ["gold", "gold", "grey"];
+        }
+        if (moves === 10) {
+            update = ["gold", "grey", "grey"];
+        }
+        this.setState({ colors: update });
+    }
+
+    render() {
+        const star = this.state.colors.map((col, i) => {
+            return (
+                <li key={i}>
+                    <i style={{ color: col }} className="fa fa-star" />
+                </li>
+            );
+        });
+        return <ul className="stars">{star}</ul>;
+    }
+}
+
+Stars.propTypes = {
+    moves: PropTypes.number.isRequired
+};
+
 function Moves(props) {
     return (
         <React.Fragment>
@@ -20,17 +62,7 @@ Moves.propTypes = {
 function ScorePanel(props) {
     return (
         <div className="score-panel">
-            <ul className="stars">
-                <li>
-                    <i className="fa fa-star" />
-                </li>
-                <li>
-                    <i className="fa fa-star" />
-                </li>
-                <li>
-                    <i className="fa fa-star" />
-                </li>
-            </ul>
+            <Stars moves={props.moves} />
             <Moves moves={props.moves} />
             {props.start ? (
                 <Seconds finishTime={props.finishTime} />
