@@ -12,10 +12,17 @@ class App extends React.Component {
         };
         this.finishTime = this.finishTime.bind(this);
         this.handleStart = this.handleStart.bind(this);
+        this.updateMoves = this.updateMoves.bind(this);
     }
 
     handleStart() {
         this.setState({ start: true });
+    }
+
+    updateMoves() {
+        this.setState(function(prevState) {
+            return { moves: prevState.moves + 1 };
+        });
     }
 
     finishTime(howLong) {
@@ -35,7 +42,10 @@ class App extends React.Component {
                         moves={this.state.moves}
                     />
                     <ul className="deck">
-                        <Cards handleStart={this.handleStart} />
+                        <Cards
+                            handleStart={this.handleStart}
+                            updateMoves={this.updateMoves}
+                        />
                     </ul>
                 </div>
             </div>

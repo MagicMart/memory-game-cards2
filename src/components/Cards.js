@@ -28,6 +28,7 @@ class Cards extends React.Component {
         const [card1, card2] = this.state.holdCards;
         const update = fn(card1, card2);
         this.setState({ cardClass: update, holdCards: [] });
+        this.props.updateMoves();
     }
 
     checkCards() {
@@ -120,7 +121,8 @@ class Cards extends React.Component {
 }
 
 Cards.propTypes = {
-    handleStart: PropTypes.func.isRequired
+    handleStart: PropTypes.func.isRequired,
+    updateMoves: PropTypes.func.isRequired
 };
 
 export default Cards;
