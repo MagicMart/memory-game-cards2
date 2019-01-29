@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Seconds from "./Seconds";
+import Moves from "./Moves";
 
 function ScorePanel(props) {
     const zeroes = (
@@ -23,8 +24,7 @@ function ScorePanel(props) {
                     <i className="fa fa-star" />
                 </li>
             </ul>
-            <span className="moves">000</span>
-            <small> Moves </small>
+            <Moves moves={props.moves} />
             {props.start ? <Seconds finishTime={props.finishTime} /> : zeroes}
 
             <div className="restart">
@@ -36,7 +36,8 @@ function ScorePanel(props) {
 
 ScorePanel.propTypes = {
     finishTime: PropTypes.func.isRequired,
-    start: PropTypes.bool.isRequired
+    start: PropTypes.bool.isRequired,
+    moves: PropTypes.number.isRequired
 };
 
 export default ScorePanel;

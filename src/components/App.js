@@ -7,7 +7,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             start: false,
-            howLong: 0
+            howLong: 0,
+            moves: 0
         };
         this.finishTime = this.finishTime.bind(this);
         this.handleStart = this.handleStart.bind(this);
@@ -31,6 +32,7 @@ class App extends React.Component {
                     <ScorePanel
                         finishTime={this.finishTime}
                         start={this.state.start}
+                        moves={this.state.moves}
                     />
                     <ul className="deck">
                         <Cards handleStart={this.handleStart} />
