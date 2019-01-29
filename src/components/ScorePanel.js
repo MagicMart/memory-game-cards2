@@ -2,15 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Seconds from "./Seconds";
-import Moves from "./Moves";
+// import Moves from "./Moves";
 
-function ScorePanel(props) {
-    const zeroes = (
+function Moves(props) {
+    return (
         <React.Fragment>
-            <span className="seconds"> 000 </span>
-            <small> Secs </small>
+            <span className="moves">{String(props.moves).padStart(3, 0)}</span>
+            <small> Moves </small>
         </React.Fragment>
     );
+}
+
+Moves.propTypes = {
+    moves: PropTypes.number.isRequired
+};
+
+function ScorePanel(props) {
     return (
         <div className="score-panel">
             <ul className="stars">
@@ -25,7 +32,14 @@ function ScorePanel(props) {
                 </li>
             </ul>
             <Moves moves={props.moves} />
-            {props.start ? <Seconds finishTime={props.finishTime} /> : zeroes}
+            {props.start ? (
+                <Seconds finishTime={props.finishTime} />
+            ) : (
+                <React.Fragment>
+                    <span className="seconds"> 000 </span>
+                    <small> Secs </small>
+                </React.Fragment>
+            )}
 
             <div className="restart">
                 <i className="fa fa-repeat" />
