@@ -17,10 +17,13 @@ class Stars extends React.Component {
         if (prevProps.moves === moves) {
             return;
         }
-        if (moves !== 5 && moves !== 10) {
+        if (moves !== 5 && moves !== 10 && moves !== 0) {
             return;
         }
         let update;
+        if (moves === 0) {
+            update = ["gold", "gold", "gold"];
+        }
         if (moves === 5) {
             update = ["gold", "gold", "grey"];
         }
@@ -73,7 +76,7 @@ function ScorePanel(props) {
                 </React.Fragment>
             )}
 
-            <div className="restart">
+            <div onClick={props.handleRestart} className="restart">
                 <i className="fa fa-repeat" />
             </div>
         </div>
@@ -83,7 +86,8 @@ function ScorePanel(props) {
 ScorePanel.propTypes = {
     finishTime: PropTypes.func.isRequired,
     start: PropTypes.bool.isRequired,
-    moves: PropTypes.number.isRequired
+    moves: PropTypes.number.isRequired,
+    handleRestart: PropTypes.func.isRequired
 };
 
 export default ScorePanel;

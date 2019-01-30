@@ -8,15 +8,26 @@ class App extends React.Component {
         this.state = {
             start: false,
             howLong: 0,
-            moves: 0
+            moves: 0,
+            resetCards: false
         };
         this.finishTime = this.finishTime.bind(this);
         this.handleStart = this.handleStart.bind(this);
         this.updateMoves = this.updateMoves.bind(this);
+        this.handleRestart = this.handleRestart.bind(this);
     }
 
     handleStart() {
         this.setState({ start: true });
+    }
+
+    handleRestart() {
+        this.setState({ start: false, howLong: 0, moves: 0, resetCards: true });
+        setTimeout(
+            function() {
+                this.setState({ resetCards: false }), 100;
+            }.bind(this)
+        );
     }
 
     updateMoves() {
@@ -40,12 +51,15 @@ class App extends React.Component {
                         finishTime={this.finishTime}
                         start={this.state.start}
                         moves={this.state.moves}
+                        handleRestart={this.handleRestart}
                     />
                     <ul className="deck">
-                        <Cards
-                            handleStart={this.handleStart}
-                            updateMoves={this.updateMoves}
-                        />
+                        {this.state.resetCards ? null : (
+                            <Cards
+                                handleStart={this.handleStart}
+                                updateMoves={this.updateMoves}
+                            />
+                        )}
                     </ul>
                 </div>
             </div>
