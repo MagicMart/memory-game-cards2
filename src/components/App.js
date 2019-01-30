@@ -1,6 +1,7 @@
 import React from "react";
 import ScorePanel from "./ScorePanel";
 import Cards from "./Cards";
+import EndOfGame from "./EndOfGame";
 
 class App extends React.Component {
     constructor(props) {
@@ -9,12 +10,15 @@ class App extends React.Component {
             start: false,
             howLong: 0,
             moves: 0,
-            resetCards: false
+            resetCards: false,
+            finishGame: false,
+            cardsMatched: 0
         };
         this.finishTime = this.finishTime.bind(this);
         this.handleStart = this.handleStart.bind(this);
         this.updateMoves = this.updateMoves.bind(this);
         this.handleRestart = this.handleRestart.bind(this);
+        this.numMatched = this.numMatched.bind(this);
     }
 
     handleStart() {
@@ -40,24 +44,43 @@ class App extends React.Component {
         this.setState({ howLong });
     }
 
+    numMatched() {
+        this.setState(function(state) {
+            return { cardsMatched: state.cardsMatched + 2 };
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.cardsMatched === 16) {
+            return;
+        }
+        if (this.state.cardsMatched === 16) {
+            this.setState({ finishGame: true, start: false });
+        }
+    }
+
     render() {
         return (
             <div>
+                {this.state.finishGame && <EndOfGame />}
                 <div className="container">
                     <header>
                         <h1>Matching Game</h1>
                     </header>
+
                     <ScorePanel
                         finishTime={this.finishTime}
                         start={this.state.start}
                         moves={this.state.moves}
                         handleRestart={this.handleRestart}
+                        howLong={this.state.howLong}
                     />
                     <ul className="deck">
                         {this.state.resetCards ? null : (
                             <Cards
                                 handleStart={this.handleStart}
                                 updateMoves={this.updateMoves}
+                                numMatched={this.numMatched}
                             />
                         )}
                     </ul>
