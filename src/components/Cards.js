@@ -27,6 +27,7 @@ class Cards extends React.Component {
     matchOrClose(fn) {
         const [card1, card2] = this.state.holdCards;
         const update = fn(card1, card2);
+
         this.setState({ cardClass: update, holdCards: [] });
         this.props.updateMoves();
     }
@@ -34,6 +35,7 @@ class Cards extends React.Component {
     checkCards() {
         const [card1, card2] = this.state.holdCards;
         if (card1.cardName === card2.cardName) {
+            this.props.numMatched();
             this.matchOrClose(
                 // Match
                 function match(card1, card2) {
@@ -122,7 +124,8 @@ class Cards extends React.Component {
 
 Cards.propTypes = {
     handleStart: PropTypes.func.isRequired,
-    updateMoves: PropTypes.func.isRequired
+    updateMoves: PropTypes.func.isRequired,
+    numMatched: PropTypes.func.isRequired
 };
 
 export default Cards;

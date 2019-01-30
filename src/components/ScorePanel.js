@@ -71,7 +71,10 @@ function ScorePanel(props) {
                 <Seconds finishTime={props.finishTime} />
             ) : (
                 <React.Fragment>
-                    <span className="seconds"> 000 </span>
+                    <span className="seconds">
+                        {" "}
+                        {String(props.howLong).padStart(3, 0)}{" "}
+                    </span>
                     <small> Secs </small>
                 </React.Fragment>
             )}
@@ -87,7 +90,8 @@ ScorePanel.propTypes = {
     finishTime: PropTypes.func.isRequired,
     start: PropTypes.bool.isRequired,
     moves: PropTypes.number.isRequired,
-    handleRestart: PropTypes.func.isRequired
+    handleRestart: PropTypes.func.isRequired,
+    howLong: PropTypes.number.isRequired
 };
 
 export default ScorePanel;
