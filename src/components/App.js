@@ -74,6 +74,7 @@ class App extends React.Component {
                         moves={this.state.moves}
                         handleRestart={this.handleRestart}
                         howLong={this.state.howLong}
+                        finishGame={this.state.finishGame}
                     />
                     <ul className="deck">
                         {this.state.resetCards ? null : (
