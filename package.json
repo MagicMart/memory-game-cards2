@@ -1,7 +1,7 @@
 {
-    "name": "memory-game-cards",
+    "name": "memory-game-cards2",
     "version": "1.0.0",
-    "description": "",
+    "description": "A memory game",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,8 +9,11 @@
         "build": "webpack --mode production",
         "watch": "webpack --mode development --watch"
     },
-    "keywords": [],
-    "author": "",
+    "keywords": [
+        "memory game",
+        "react"
+    ],
+    "author": "Martin Tudor",
     "license": "ISC",
     "devDependencies": {
         "@babel/core": "^7.2.2",
