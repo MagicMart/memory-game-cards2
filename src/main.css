@@ -131,7 +131,7 @@ span {
 }
 
 .score-panel .restart {
-    /* float: right; */
+    color: green;
     font-size: 28px;
     cursor: pointer;
 }
