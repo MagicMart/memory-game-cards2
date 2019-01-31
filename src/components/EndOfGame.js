@@ -2,8 +2,9 @@ import React from "react";
 
 function EndOfGame() {
     return (
-        <div className="end-of-game">
-            <div className="final-figures">
+        <div className="modal-background">
+            <div className="modal-message">
+                <div className="close">X</div>
                 <h1>End of Game</h1>
             </div>
         </div>

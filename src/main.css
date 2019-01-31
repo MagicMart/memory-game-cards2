@@ -140,22 +140,40 @@ span {
     font-family: monospace;
 }
 
-.end-of-game {
-    display: flex;
-    position: absolute;
-    z-index: 2;
+.modal-background {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
+    padding-top: 150px;
+    overflow: auto;
     background-color: rgba(46, 61, 73, 0.3);
 }
 
-.final-figures {
-    display: flex;
-    justify-content: center;
-    width: 320px;
+.modal-message {
+    width: 80%;
     margin: auto;
+    padding: 20px;
+    border: 1px solid black;
     background-color: rgba(255, 255, 255, 0.6);
 }
+
+.close {
+    color: black;
+    float: right;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 536px) {
     .deck {
         width: 310px;
