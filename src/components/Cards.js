@@ -15,7 +15,7 @@ class Cards extends React.Component {
             cardClass: []
         };
         this.openCard = this.openCard.bind(this);
-        this.matching = false;
+        this.checkingPhase = false;
     }
 
     componentDidMount() {
@@ -31,7 +31,7 @@ class Cards extends React.Component {
 
         this.setState({ cardClass: update, holdCards: [] });
         this.props.updateMoves();
-        this.matching = false;
+        this.checkingPhase = false;
     }
 
     checkCards() {
@@ -72,7 +72,7 @@ class Cards extends React.Component {
             return;
         }
         if (this.state.holdCards.length === 2) {
-            this.matching = true;
+            this.checkingPhase = true;
             this.checkCards();
         }
     }
@@ -82,7 +82,8 @@ class Cards extends React.Component {
             this.props.handleStart();
             this.gameStarted = true;
         }
-        if (this.matching) {
+        // Don't allow more cards to be opened while open cards are being checked
+        if (this.checkingPhase) {
             return;
         }
         const { cardName, cardIndex, cardClass } = obj;
