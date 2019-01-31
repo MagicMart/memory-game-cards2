@@ -26,7 +26,14 @@ class App extends React.Component {
     }
 
     handleRestart() {
-        this.setState({ start: false, howLong: 0, moves: 0, resetCards: true });
+        this.setState({
+            start: false,
+            howLong: 0,
+            moves: 0,
+            resetCards: true,
+            cardsMatched: 0,
+            finishGame: false
+        });
         setTimeout(
             function() {
                 this.setState({ resetCards: false }), 100;
@@ -41,7 +48,9 @@ class App extends React.Component {
     }
 
     finishTime(howLong) {
-        this.setState({ howLong });
+        if (this.state.finishGame) {
+            this.setState({ howLong });
+        }
     }
 
     numMatched() {
@@ -62,7 +71,9 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                {this.state.finishGame && <EndOfGame />}
+                {this.state.finishGame && (
+                    <EndOfGame handleRestart={this.handleRestart} />
+                )}
                 <div className="container">
                     <header>
                         <h1>Matching Game</h1>
