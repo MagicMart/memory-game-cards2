@@ -69,7 +69,7 @@ class Cards extends React.Component {
         if (prevState.holdCards === this.state.holdCards) {
             return;
         }
-        if (this.state.holdCards.length > 1) {
+        if (this.state.holdCards.length === 2) {
             this.checkCards();
         }
     }
@@ -78,6 +78,9 @@ class Cards extends React.Component {
         if (!this.gameStarted) {
             this.props.handleStart();
             this.gameStarted = true;
+        }
+        if (this.state.holdCards >= 2) {
+            return;
         }
         const { cardName, cardIndex, cardClass } = obj;
         if (cardClass === "card open show" || cardClass === "card open match") {
