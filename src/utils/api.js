@@ -6,12 +6,13 @@ function shuffleArray(a) {
         while (shuffledArray.length !== length) {
             const randNum = Math.floor(Math.random() * arr.length);
             const cut = arr[randNum];
-            arr = arr.filter((el, i) => i !== randNum);
-            shuffledArray = [...shuffledArray, cut];
+            arr.splice(randNum, 1);
+            shuffledArray.push(cut);
         }
         return shuffledArray;
     } catch (error) {
-        throw error;
+        // eslint-disable-next-line no-console
+        console.error(error);
     }
 }
 
