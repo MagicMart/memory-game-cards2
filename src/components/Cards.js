@@ -15,6 +15,7 @@ class Cards extends React.Component {
             cardClass: []
         };
         this.openCard = this.openCard.bind(this);
+        this.matching = false;
     }
 
     componentDidMount() {
@@ -30,6 +31,7 @@ class Cards extends React.Component {
 
         this.setState({ cardClass: update, holdCards: [] });
         this.props.updateMoves();
+        this.matching = false;
     }
 
     checkCards() {
@@ -70,6 +72,7 @@ class Cards extends React.Component {
             return;
         }
         if (this.state.holdCards.length === 2) {
+            this.matching = true;
             this.checkCards();
         }
     }
@@ -79,7 +82,7 @@ class Cards extends React.Component {
             this.props.handleStart();
             this.gameStarted = true;
         }
-        if (this.state.holdCards >= 2) {
+        if (this.matching) {
             return;
         }
         const { cardName, cardIndex, cardClass } = obj;
