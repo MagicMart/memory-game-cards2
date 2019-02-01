@@ -7,32 +7,32 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            start: false,
-            howLong: 0,
+            startTicking: false,
+            usersTime: 0,
             moves: 0,
             resetCards: false,
-            finishGame: false,
+            displayEnd: false,
             cardsMatched: 0
         };
-        this.finishTime = this.finishTime.bind(this);
+        this.recUsersTime = this.recUsersTime.bind(this);
         this.handleStart = this.handleStart.bind(this);
         this.updateMoves = this.updateMoves.bind(this);
         this.handleRestart = this.handleRestart.bind(this);
-        this.numMatched = this.numMatched.bind(this);
+        this.addTwoMatched = this.addTwoMatched.bind(this);
     }
 
     handleStart() {
-        this.setState({ start: true });
+        this.setState({ startTicking: true });
     }
 
     handleRestart() {
         this.setState({
-            start: false,
-            howLong: 0,
+            startTicking: false,
+            usersTime: 0,
             moves: 0,
             resetCards: true,
             cardsMatched: 0,
-            finishGame: false
+            displayEnd: false
         });
         setTimeout(
             function() {
@@ -47,13 +47,13 @@ class App extends React.Component {
         });
     }
 
-    finishTime(howLong) {
-        if (this.state.finishGame) {
-            this.setState({ howLong });
+    recUsersTime(usersTime) {
+        if (this.state.displayEnd) {
+            this.setState({ usersTime });
         }
     }
 
-    numMatched() {
+    addTwoMatched() {
         this.setState(function(state) {
             return { cardsMatched: state.cardsMatched + 2 };
         });
@@ -64,14 +64,14 @@ class App extends React.Component {
             return;
         }
         if (this.state.cardsMatched === 16) {
-            this.setState({ finishGame: true, start: false });
+            this.setState({ displayEnd: true, startTicking: false });
         }
     }
 
     render() {
         return (
             <div>
-                {this.state.finishGame && (
+                {this.state.displayEnd && (
                     <EndOfGame handleRestart={this.handleRestart} />
                 )}
                 <div className="container">
@@ -80,19 +80,19 @@ class App extends React.Component {
                     </header>
 
                     <ScorePanel
-                        finishTime={this.finishTime}
-                        start={this.state.start}
+                        recUsersTime={this.recUsersTime}
+                        startTicking={this.state.startTicking}
                         moves={this.state.moves}
                         handleRestart={this.handleRestart}
-                        howLong={this.state.howLong}
-                        finishGame={this.state.finishGame}
+                        usersTime={this.state.usersTime}
+                        displayEnd={this.state.displayEnd}
                     />
                     <ul className="deck">
                         {this.state.resetCards ? null : (
                             <Cards
                                 handleStart={this.handleStart}
                                 updateMoves={this.updateMoves}
-                                numMatched={this.numMatched}
+                                addTwoMatched={this.addTwoMatched}
                             />
                         )}
                     </ul>

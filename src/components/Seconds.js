@@ -15,7 +15,7 @@ class Seconds extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.timerID);
-        this.props.finishTime(this.state.seconds);
+        this.props.recUsersTime(this.state.seconds);
     }
 
     tick() {
@@ -35,7 +35,7 @@ class Seconds extends React.Component {
 }
 
 Seconds.propTypes = {
-    finishTime: PropTypes.func.isRequired
+    recUsersTime: PropTypes.func.isRequired
 };
 
 export default Seconds;

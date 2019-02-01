@@ -67,15 +67,15 @@ function ScorePanel(props) {
         <div className="score-panel">
             <Stars moves={props.moves} />
             <Moves moves={props.moves} />
-            {props.start ? (
-                <Seconds finishTime={props.finishTime} />
+            {props.startTicking ? (
+                <Seconds recUsersTime={props.recUsersTime} />
             ) : (
                 <React.Fragment>
                     <span className="seconds">
                         {" "}
                         {/* finish game is true when all cards are matched */}
-                        {props.finishGame
-                            ? String(props.howLong).padStart(3, 0)
+                        {props.displayEnd
+                            ? String(props.usersTime).padStart(3, 0)
                             : "000"}{" "}
                     </span>
                     <small> Secs </small>
@@ -90,12 +90,12 @@ function ScorePanel(props) {
 }
 
 ScorePanel.propTypes = {
-    finishTime: PropTypes.func.isRequired,
-    start: PropTypes.bool.isRequired,
+    recUsersTime: PropTypes.func.isRequired,
+    startTicking: PropTypes.bool.isRequired,
     moves: PropTypes.number.isRequired,
     handleRestart: PropTypes.func.isRequired,
-    howLong: PropTypes.number.isRequired,
-    finishGame: PropTypes.bool.isRequired
+    usersTime: PropTypes.number.isRequired,
+    displayEnd: PropTypes.bool.isRequired
 };
 
 export default ScorePanel;

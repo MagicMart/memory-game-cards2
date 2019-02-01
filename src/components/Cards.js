@@ -37,7 +37,7 @@ class Cards extends React.Component {
     checkCards() {
         const [card1, card2] = this.state.holdCards;
         if (card1.cardName === card2.cardName) {
-            this.props.numMatched();
+            this.props.addTwoMatched();
             this.matchOrClose(
                 // Match
                 function match(card1, card2) {
@@ -132,7 +132,7 @@ class Cards extends React.Component {
 Cards.propTypes = {
     handleStart: PropTypes.func.isRequired,
     updateMoves: PropTypes.func.isRequired,
-    numMatched: PropTypes.func.isRequired
+    addTwoMatched: PropTypes.func.isRequired
 };
 
 export default Cards;
