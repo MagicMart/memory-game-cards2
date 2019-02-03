@@ -5,6 +5,36 @@ import api from "../utils/api";
 
 const { shuffleArray, cardArray } = api;
 
+function Deck(props) {
+    return (
+        <React.Fragment>
+            {props.cards.map(function(card, i) {
+                return (
+                    <li
+                        key={card + i}
+                        className={props.cardClass[i]}
+                        onClick={function() {
+                            props.openCard({
+                                cardName: card,
+                                cardIndex: i,
+                                cardClass: props.cardClass[i]
+                            });
+                        }.bind(this)}
+                    >
+                        <i className={card} />
+                    </li>
+                );
+            })}
+        </React.Fragment>
+    );
+}
+
+Deck.propTypes = {
+    cards: PropTypes.array.isRequired,
+    cardClass: PropTypes.array.isRequired,
+    openCard: PropTypes.func.isRequired
+};
+
 class Cards extends React.Component {
     constructor(props) {
         super(props);
@@ -106,26 +136,13 @@ class Cards extends React.Component {
     }
 
     render() {
-        const cards = this.state.cards.map(
-            function(card, i) {
-                return (
-                    <li
-                        key={card + i}
-                        className={this.state.cardClass[i]}
-                        onClick={function() {
-                            this.openCard({
-                                cardName: card,
-                                cardIndex: i,
-                                cardClass: this.state.cardClass[i]
-                            });
-                        }.bind(this)}
-                    >
-                        <i className={card} />
-                    </li>
-                );
-            }.bind(this)
+        return (
+            <Deck
+                cards={this.state.cards}
+                cardClass={this.state.cardClass}
+                openCard={this.openCard}
+            />
         );
-        return <React.Fragment>{cards}</React.Fragment>;
     }
 }
 
