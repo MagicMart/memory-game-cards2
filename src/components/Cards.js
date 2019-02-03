@@ -7,7 +7,7 @@ const { shuffleArray, cardArray } = api;
 
 function Deck(props) {
     return (
-        <React.Fragment>
+        <ul className="deck">
             {props.cards.map(function(card, i) {
                 return (
                     <li
@@ -25,7 +25,7 @@ function Deck(props) {
                     </li>
                 );
             })}
-        </React.Fragment>
+        </ul>
     );
 }
 

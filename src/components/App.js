@@ -87,15 +87,14 @@ class App extends React.Component {
                         usersTime={this.state.usersTime}
                         displayEnd={this.state.displayEnd}
                     />
-                    <ul className="deck">
-                        {this.state.resetCards ? null : (
-                            <Cards
-                                handleStart={this.handleStart}
-                                updateMoves={this.updateMoves}
-                                addTwoMatched={this.addTwoMatched}
-                            />
-                        )}
-                    </ul>
+
+                    {this.state.resetCards ? null : (
+                        <Cards
+                            handleStart={this.handleStart}
+                            updateMoves={this.updateMoves}
+                            addTwoMatched={this.addTwoMatched}
+                        />
+                    )}
                 </div>
             </div>
         );
