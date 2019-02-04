@@ -44,7 +44,6 @@ class Cards extends React.Component {
             cardClass: []
         };
         this.openCard = this.openCard.bind(this);
-        this.checkingPhase = false;
     }
 
     componentDidMount() {
