@@ -60,7 +60,6 @@ class Cards extends React.Component {
 
         this.setState({ cardClass: update, holdCards: [] });
         this.props.updateMoves();
-        this.checkingPhase = false;
     }
 
     checkCards() {
@@ -101,7 +100,6 @@ class Cards extends React.Component {
             return;
         }
         if (this.state.holdCards.length === 2) {
-            this.checkingPhase = true;
             this.checkCards();
         }
     }
@@ -111,7 +109,7 @@ class Cards extends React.Component {
             this.props.handleStart();
         }
         // Don't allow more cards to be opened while open cards are being checked
-        if (this.checkingPhase) {
+        if (this.state.holdCards.length === 2) {
             return;
         }
         const { cardName, cardIndex, cardClass } = obj;
