@@ -64,7 +64,10 @@ class App extends React.Component {
             return;
         }
         if (this.state.cardsMatched === 16) {
-            this.setState({ displayEnd: true, startTicking: false });
+            setTimeout(
+                () => this.setState({ displayEnd: true, startTicking: false }),
+                1000
+            );
         }
     }
 
