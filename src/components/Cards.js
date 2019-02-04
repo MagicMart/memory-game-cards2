@@ -6,20 +6,19 @@ import api from "../utils/api";
 const { shuffleArray, cardArray } = api;
 
 function Deck(props) {
+    const { cards, cardClass, openCard } = props;
     return (
         <ul className="deck">
-            {props.cards.map(function(card, i) {
+            {cards.map(function(card, i) {
                 return (
                     <li
                         key={card + i}
-                        className={props.cardClass[i]}
-                        onClick={function() {
-                            props.openCard({
-                                cardName: card,
-                                cardIndex: i,
-                                cardClass: props.cardClass[i]
-                            });
-                        }.bind(this)}
+                        className={cardClass[i]}
+                        onClick={openCard.bind(null, {
+                            cardName: card,
+                            cardIndex: i,
+                            cardClass: cardClass[i]
+                        })}
                     >
                         <i className={card} />
                     </li>
