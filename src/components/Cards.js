@@ -107,9 +107,8 @@ class Cards extends React.Component {
     }
 
     openCard(obj) {
-        if (!this.gameStarted) {
+        if (!this.props.startTicking) {
             this.props.handleStart();
-            this.gameStarted = true;
         }
         // Don't allow more cards to be opened while open cards are being checked
         if (this.checkingPhase) {
@@ -146,6 +145,7 @@ class Cards extends React.Component {
 }
 
 Cards.propTypes = {
+    startTicking: PropTypes.bool.isRequired,
     handleStart: PropTypes.func.isRequired,
     updateMoves: PropTypes.func.isRequired,
     addTwoMatched: PropTypes.func.isRequired

@@ -93,6 +93,7 @@ class App extends React.Component {
 
                     {this.state.resetCards ? null : (
                         <Cards
+                            startTicking={this.state.startTicking}
                             handleStart={this.handleStart}
                             updateMoves={this.updateMoves}
                             addTwoMatched={this.addTwoMatched}
