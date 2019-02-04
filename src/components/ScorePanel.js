@@ -4,25 +4,7 @@ import PropTypes from "prop-types";
 import Seconds from "./Seconds";
 // import Moves from "./Moves";
 
-function Stars(props) {
-    return (
-        <ul className="stars">
-            {props.colors.map((col, i) => {
-                return (
-                    <li key={i}>
-                        <i style={{ color: col }} className="fa fa-star" />
-                    </li>
-                );
-            })}
-        </ul>
-    );
-}
-
-Stars.propTypes = {
-    colors: PropTypes.array.isRequired
-};
-
-class StarsContainer extends React.Component {
+class Stars extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,11 +34,21 @@ class StarsContainer extends React.Component {
     }
 
     render() {
-        return <Stars colors={this.state.colors} />;
+        return (
+            <ul className="stars">
+                {this.state.colors.map((col, i) => {
+                    return (
+                        <li key={i}>
+                            <i style={{ color: col }} className="fa fa-star" />
+                        </li>
+                    );
+                })}
+            </ul>
+        );
     }
 }
 
-StarsContainer.propTypes = {
+Stars.propTypes = {
     moves: PropTypes.number.isRequired
 };
 
@@ -76,7 +68,7 @@ Moves.propTypes = {
 function ScorePanel(props) {
     return (
         <div className="score-panel">
-            <StarsContainer moves={props.moves} />
+            <Stars moves={props.moves} />
             <Moves moves={props.moves} />
             {props.startTicking ? (
                 <Seconds recUsersTime={props.recUsersTime} />
