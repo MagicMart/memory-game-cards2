@@ -46,7 +46,9 @@ class App extends React.Component {
     }
 
     recUsersTime(usersTime) {
-        this.setState({ usersTime });
+        if (this.state.cardsMatched === 16) {
+            this.setState({ usersTime });
+        }
     }
 
     addTwoMatched() {
