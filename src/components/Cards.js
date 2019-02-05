@@ -89,7 +89,7 @@ class Cards extends React.Component {
                             });
                         }.bind(this)
                     ),
-                1001
+                600
             );
         }
     }
