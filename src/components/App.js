@@ -11,7 +11,6 @@ class App extends React.Component {
             usersTime: 0,
             moves: 0,
             resetCards: false,
-            displayEnd: false,
             cardsMatched: 0
         };
         this.recUsersTime = this.recUsersTime.bind(this);
@@ -31,8 +30,7 @@ class App extends React.Component {
             usersTime: 0,
             moves: 0,
             resetCards: true,
-            cardsMatched: 0,
-            displayEnd: false
+            cardsMatched: 0
         });
         setTimeout(
             function() {
@@ -48,9 +46,7 @@ class App extends React.Component {
     }
 
     recUsersTime(usersTime) {
-        if (this.state.displayEnd) {
-            this.setState({ usersTime });
-        }
+        this.setState({ usersTime });
     }
 
     addTwoMatched() {
@@ -64,17 +60,14 @@ class App extends React.Component {
             return;
         }
         if (this.state.cardsMatched === 16) {
-            setTimeout(
-                () => this.setState({ displayEnd: true, startTicking: false }),
-                1000
-            );
+            setTimeout(() => this.setState({ startTicking: false }), 1000);
         }
     }
 
     render() {
         return (
             <div>
-                {this.state.displayEnd && (
+                {this.state.usersTime !== 0 && (
                     <EndOfGame handleRestart={this.handleRestart} />
                 )}
                 <div className="container">
@@ -88,7 +81,6 @@ class App extends React.Component {
                         moves={this.state.moves}
                         handleRestart={this.handleRestart}
                         usersTime={this.state.usersTime}
-                        displayEnd={this.state.displayEnd}
                     />
 
                     {this.state.resetCards ? null : (
