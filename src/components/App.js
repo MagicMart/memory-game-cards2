@@ -44,8 +44,10 @@ class App extends React.Component {
             return { moves: prevState.moves + 1 };
         });
     }
-
+    // recUsersTime will be called when the Seconds Component is unmounted
     recUsersTime(usersTime) {
+        // On a restart, don't allow the user's finish time to be recorded.
+        // Therefore, the EndOFGame component won't mount on a restart.
         if (this.state.cardsMatched === 16) {
             this.setState({ usersTime });
         }
