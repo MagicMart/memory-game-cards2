@@ -94,7 +94,7 @@ class Cards extends React.Component {
         }
     }
 
-    componentDidUpdate(prevState) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevState.holdCards === this.state.holdCards) {
             return;
         }
