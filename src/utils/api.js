@@ -1,15 +1,8 @@
 function shuffleArray(a) {
     try {
         let arr = [...a];
-        const length = arr.length;
-        let shuffledArray = [];
-        while (shuffledArray.length !== length) {
-            const randNum = Math.floor(Math.random() * arr.length);
-            const cut = arr[randNum];
-            arr.splice(randNum, 1);
-            shuffledArray.push(cut);
-        }
-        return shuffledArray;
+        arr.sort(() => 0.5 - Math.random());
+        return arr;
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
