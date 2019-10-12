@@ -21,7 +21,7 @@ class App extends React.Component {
     }
 
     handleStart() {
-        this.setState({ startTicking: true });
+        this.setState({startTicking: true});
     }
 
     handleRestart() {
@@ -34,28 +34,30 @@ class App extends React.Component {
         });
         setTimeout(
             function() {
-                this.setState({ resetCards: false }), 100;
+                this.setState({resetCards: false}), 100;
             }.bind(this)
         );
     }
 
     updateMoves() {
         this.setState(function(prevState) {
-            return { moves: prevState.moves + 1 };
+            return {moves: prevState.moves + 1};
         });
     }
-    // recUsersTime will be called when the Seconds Component is unmounted
+    /**
+     * recUsersTime will be called when the Seconds Component is unmounted
+     * */
     recUsersTime(usersTime) {
         // On a restart, don't allow the user's finish time to be recorded.
         // Therefore, the EndOFGame component won't mount on a restart.
         if (this.state.cardsMatched === 16) {
-            this.setState({ usersTime });
+            this.setState({usersTime});
         }
     }
 
     addTwoMatched() {
         this.setState(function(state) {
-            return { cardsMatched: state.cardsMatched + 2 };
+            return {cardsMatched: state.cardsMatched + 2};
         });
     }
 
@@ -64,7 +66,7 @@ class App extends React.Component {
             return;
         }
         if (this.state.cardsMatched === 16) {
-            setTimeout(() => this.setState({ startTicking: false }), 1000);
+            setTimeout(() => this.setState({startTicking: false}), 1000);
         }
     }
 
