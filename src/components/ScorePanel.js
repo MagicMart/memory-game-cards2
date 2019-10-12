@@ -13,24 +13,21 @@ class Stars extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { moves } = this.props;
+        const {moves} = this.props;
         if (prevProps.moves === moves) {
-            return;
-        }
-        if (moves !== 5 && moves !== 10 && moves !== 0) {
             return;
         }
         let update;
         if (moves === 0) {
             update = ["gold", "gold", "gold"];
-        }
-        if (moves === 5) {
+        } else if (moves === 10) {
             update = ["gold", "gold", "grey"];
-        }
-        if (moves === 10) {
+        } else if (moves === 15) {
             update = ["gold", "grey", "grey"];
+        } else {
+            return;
         }
-        this.setState({ colors: update });
+        this.setState({colors: update});
     }
 
     render() {
@@ -39,7 +36,7 @@ class Stars extends React.Component {
                 {this.state.colors.map((col, i) => {
                     return (
                         <li key={i}>
-                            <i style={{ color: col }} className="fa fa-star" />
+                            <i style={{color: col}} className="fa fa-star" />
                         </li>
                     );
                 })}
@@ -55,7 +52,9 @@ Stars.propTypes = {
 function Moves(props) {
     return (
         <React.Fragment>
-            <span className="moves">{String(props.moves).padStart(3, 0)}</span>
+            <span className="moves">
+                {String(props.moves).padStart(3, "0")}
+            </span>
             <small> Moves </small>
         </React.Fragment>
     );
@@ -76,7 +75,7 @@ function ScorePanel(props) {
                 <React.Fragment>
                     <span className="seconds">
                         {" "}
-                        {String(props.usersTime).padStart(3, 0)}{" "}
+                        {String(props.usersTime).padStart(3, "0")}{" "}
                     </span>
                     <small> Secs </small>
                 </React.Fragment>
