@@ -19,14 +19,14 @@ class Seconds extends React.Component {
     }
 
     tick() {
-        this.setState(state => ({ seconds: state.seconds + 1 }));
+        this.setState(state => ({seconds: state.seconds + 1}));
     }
 
     render() {
         return (
             <React.Fragment>
                 <span className="seconds">
-                    {String(this.state.seconds).padStart(3, 0)}
+                    {String(this.state.seconds).padStart(3, "0")}
                 </span>
                 <small> Secs </small>
             </React.Fragment>
